@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gestaoemprestimoquery
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gestaoemprestimoquery
+  template:
+    metadata:
+      labels:
+        app: gestaoemprestimoquery
+    spec:
+      containers:
+        - name: gestaoemprestimoquery
+          image: diogofilipe7/gestaoemprestimoquery:latest
+          ports:
+            - containerPort: 3002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gestaoemprestimoquery
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/gestaoemprestimoquery
+spec:
+  clusterIP: 10.99.146.170
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31801
+    port: 3002
+    protocol: TCP
+    targetPort: 3002
+  selector:
+    app: gestaoemprestimoquery
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost
