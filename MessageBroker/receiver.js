@@ -8,7 +8,7 @@ const exchange = "GestorEmprestimosQuery_exchange";
 
 module.exports = {
   executingReceiver : function() {
-    amqp.connect('amqp://localhost', function(error0, connection) {
+    amqp.connect('amqp://yqqobhcr:2-IGDCpirA3UU-DrzhpSrhwTr-8oUhPq@roedeer.rmq.cloudamqp.com/yqqobhcr', function(error0, connection) {
       if (error0) {
           throw error0;
       }
